@@ -1,5 +1,4 @@
 class CarFactory {
-
     constructor() {
         this.cars = [];
         this.quantity = 0;
@@ -69,22 +68,22 @@ class Car {
 }
 
 class Avanza extends Car{
-    constructor(ban,kursi,pintu,roda,production_year,merk){
-        super(ban,kursi,pintu,roda,production_year);
+    constructor(ban,kursi,pintu,roda,merk){
+        super(ban,kursi,pintu,roda);
         this.merk = "Avanza";
     }
 }
 
 class Toyota extends Car{
-     constructor(ban,kursi,pintu,roda,production_year,merk){
-        super(ban,kursi,pintu,roda,production_year);
+     constructor(ban,kursi,pintu,roda,merk){
+        super(ban,kursi,pintu,roda);
         this.merk = "Toyota";
     }
 }
 
 class Mercedes extends Car{
-     constructor(ban,kursi,pintu,roda,production_year,merk){
-        super(ban,kursi,pintu,roda,production_year);
+     constructor(ban,kursi,pintu,roda,merk){
+        super(ban,kursi,pintu,roda);
         this.merk = "Mercedes";
     }
 }
