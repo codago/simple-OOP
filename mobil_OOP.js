@@ -9,25 +9,37 @@ class CarFactory {
         for (let i = 0; i < quantity; i++) {
             if (car.merk === 'Avanza'){
                 this.cars.push(car);
-                console.log(this.cars[i])
-                console.log("=================================");
                 car.getProductionYear();
                 let currYear = car.getCurrentYear()
-                car.quarantee_simulations(currYear);
+                let quarantee = car.quarantee_simulations(currYear);
+                console.log(this.cars[i])
+                if(quarantee === 0){
+                  console.log("car already expired");
+                }else{
+                  console.log("car quarantee : "+quarantee+" years")
+                }
                 console.log("=================================");
             }else if(car.merk === 'Toyota'){
                 this.cars.push(car);
-                console.log(this.cars[i])
-                console.log("=================================");
                 let currYear = car.getCurrentYear()
-                car.quarantee_simulations(currYear);
+                let quarantee = car.quarantee_simulations(currYear);
+                console.log(this.cars[i])
+                if(quarantee === 0){
+                  console.log("car already expired");
+                }else{
+                  console.log("car quarantee : "+quarantee+" years")
+                }
                 console.log("=================================");
             }else if(car.merk === 'Mercedes'){
                 this.cars.push(car);
-                console.log(this.cars[i])
-                console.log("=================================");
                 let currYear = car.getCurrentYear()
-                car.quarantee_simulations(currYear);
+                let quarantee = car.quarantee_simulations(currYear);
+                console.log(this.cars[i])
+                if(quarantee === 0){
+                  console.log("car already expired");
+                }else{
+                  console.log("car quarantee : "+quarantee+" years")
+                }
                 console.log("=================================");
             }
         }
@@ -49,21 +61,29 @@ class Car {
         this.production_year = 0;
         this.expire = false;
         this.currYear = 0;
+        this.fixedQuarantee = 5;
     }
 
     getProductionYear(){
-         this.production_year = Math.floor(Math.random() * (2010 - 1995 + 1)) + 1995;
+         this.production_year = Math.floor(Math.random() * (2016 - 2010 + 1)) + 2010;
          return this.production_year;
     }
 
     getCurrentYear() {
-        this.currYear = Math.floor(Math.random() * (2030 - 2017 + 1)) + 2017;
+        this.currYear = Math.floor(Math.random() * (2020 - 2017 + 1)) + 2017;
         return this.currYear
     }
 
     quarantee_simulations(currentYear) {
         var quarantee = currentYear - this.production_year;
-        console.log("car quarantee : "+quarantee+" years")
+        if(quarantee <= this.fixedQuarantee){
+          this.expire = false;
+          return quarantee
+        }else{
+          this.expire = true;
+          return 0;
+        }
+
     }
 }
 
@@ -96,7 +116,7 @@ class Tyre {
 
 
 let carFactory = new CarFactory();
-carFactory.randomProductions();
+// carFactory.randomProductions();
 carFactory.produceCars(new Avanza(new Tyre("michelin"),4,2,5));
 // carFactory.produceCars(new Toyota(new Tyre("continental"),2,4,4));
 // carFactory.produceCars(new Mercedes(new Tyre("goodyear"),4,2,3));
