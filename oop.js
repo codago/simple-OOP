@@ -1,29 +1,26 @@
 "use strick"
 
 class Mobil{
-  constructor(merekBan, bulanProduksi, tahunProduksi){
+  constructor(merekBan){
     this.merekBan       = merekBan;
-    this.bulanProduksi  = bulanProduksi;
-    this.tahunProduksi  = tahunProduksi;
-    this.kursi          = 3;
-    this.pintu          = 4;
-    this.jumlahRoda     = 4;
+    this.kursi          = "2 Baris";
+    this.pintu          = "4 Pintu";
+    this.merk           = "";
 
   }
 }
 
 class Avanza extends Mobil{
-    constructor(merekBan, bulanProduksi, tahunProduksi){
-      super(merekBan, bulanProduksi, tahunProduksi)
+    constructor(merekBan){
+      super(merekBan)
       this.kursi      = "3 baris";
       this.merk       = "Avanza";
     }
 }
 
 class Yaris extends Mobil{
-    constructor(merekBan, bulanProduksi, tahunProduksi){
-      super(merekBan, bulanProduksi, tahunProduksi)
-      this.kursi      = 2;
+    constructor(merekBan){
+      super(merekBan)
       this.merk       = "Yaris";
     }
 }
@@ -36,64 +33,44 @@ class ban{
 
 class pabrikMobil{
      constructor(){
-       this.Avanza  = [];
-       this.Yaris   = [];
+      this.produksi = [];
      }
 
-     produksiMobil(mobil){
+     produksiMobil(mobil, bulanProduksi, tahunProduksi){
        let jumlahProduksi = Math.floor((Math.random() * 25) + 1);
+       this.produk = [];
        for (let i = 0; i<jumlahProduksi; i++){
-           if (mobil.merk == 'Avanza'){
-               this.Avanza.push(mobil);
-           }
-           else if(mobil.merk == "Yaris"){
-               this.Yaris.push(mobil);
-           }
+            this.produk.push(mobil, bulanProduksi, tahunProduksi);
+            this.produksi.push(this.produk);
        }
      }
 
-     hasilProduksi(){
-        for (var i = 0; i < this.Avanza.length; i++) {
-          console.log(this.Avanza[i]);
-        }
-
-        for (var i = 0; i < this.Ayla.length; i++) {
-          console.log(this.Yaris[i]);
-        }
-      }
-
+     jumlahProduksi(bulan){
+       let y=0;
+       for(let x=0; x<this.produksi.length; x++){
+         if(bulan == this.produksi[x][1]){
+           y++;
+         }
+       }
+       console.log('Mobil yang di produksi bulan '+bulan +' sebanyak '+y+' mobil\n');
+     }
 
      cekGaransi(){
-       this.lamaGaransi     = 5;
-       this.tahunAcak       = Math.floor((Math.random() * 10) + 1);
-       for (let i=0; i<this.Avanza.length; i++){
-          this.tahunProduksi   = this.Avanza[i].tahunProduksi;
-          this.garansi         = this.tahunAcak - this.tahunProduksi;
-          if (this.garansi < this.lamaGaransi){
-              this.statusGaransi = "garansi masih berlaku";
-              console.log(this.statusGaransi);
-          }
-          else{
-              this.statusGaransi = "garansi sudah expired";
-              console.log(this.statusGaransi);
-          }
-      }
-      for (let i=0; i<this.Yaris.length; i++){
-         this.tahunProduksi   = this.Yaris[i].tahunProduksi;
-         this.garansi         = this.tahunAcak - this.tahunProduksi;
-         if (this.garansi < this.lamaGaransi){
-             this.statusGaransi = "garansi masih berlaku selama";
-             console.log(this.statusGaransi);
+       this.lamaGaransi = 5;
+       this.tahunSekarang =Math.floor(Math.random() * (10)) + 2017;
+       for (let i = 0; i < this.produksi.length; i++) {
+         if (this.tahunSekarang-(this.produksi[i][2]) > 5 ) {
+           console.log('mobil '+(i+1)+' Produksi Tahun '+ this.produksi[i][2]+' garansi expired');
+         }else {
+           console.log('mobil '+(i+1)+' Produksi Tahun '+ this.produksi[i][2]+' garansi Masih Berlaku');
          }
-         else{
-             this.statusGaransi = "garansi sudah expired";
-             console.log(this.statusGaransi);
-         }
+       }
      }
-    }
 }
 
 let Toyota = new pabrikMobil();
-Toyota.produksiMobil(new Avanza(new ban("michelin"), "Januari", 2017));
-console.log(Toyota.Avanza);
+Toyota.produksiMobil(new Avanza(new ban("michelin")), "januari", 2017);
+Toyota.produksiMobil(new Yaris(new ban("michelin")), "januari", 2017);
+Toyota.jumlahProduksi("januari")
 Toyota.cekGaransi();
+//console.log(Toyota.produksi);
