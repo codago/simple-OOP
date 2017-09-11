@@ -1,4 +1,4 @@
-"use strick"
+"use strict"
 
 class Mobil{
   constructor(merekBan){
@@ -6,7 +6,6 @@ class Mobil{
     this.kursi          = "2 Baris";
     this.pintu          = "4 Pintu";
     this.merk           = "";
-
   }
 }
 
